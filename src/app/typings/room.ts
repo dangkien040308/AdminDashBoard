@@ -6,7 +6,7 @@ export type RoomInfor = {
   comports : string[],
   status : string,
   stock : string,
-  price_per_day : string,
+  price_per_night : string,
   price_per_month : string,
   description : string[],
   available_from : string | number,

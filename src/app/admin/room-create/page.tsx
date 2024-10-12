@@ -59,7 +59,7 @@ export default function Room() {
 
   const branchArray = [
     {
-      id: "cm1vlzjw90002pmz3wkn04cq2",
+      id: "cm25zey1c0004jv0a02qe0zb0",
       name: "Tao Đàn Park",
     },
   ];
@@ -71,79 +71,55 @@ export default function Room() {
     id : "",
     name : ""
   })
-  // Submit Handler
-  const handleSubmitGlobalData = async () => {
-    // const roomInfor = {
-    //   name : roomInforData.name ,
-    //   stock : roomInforData.stock,
-    //   bed_type : roomInforData.bed_type,
-    //   branch : roomInforData.branch,
-    //   acreage : roomInforData.acreage,
-    //   pricePerDay : roomInforData.price_per_day,
-    //   pricePerMonth : roomInforData.price_per_month ,
-    //   description : roomInforData.description,
-    //   maxAdults : roomInforData.max_adults,
-    //   maxChildren : roomInforData.max_children,
-    //   maxBabies : roomInforData.max_babies,
-    //   availableFrom : date?.from?.toLocaleDateString(),
-    //   availableTo : date?.to?.toLocaleDateString(),
-    //   comforts : comportArray,
-    //   images : files,
-    //   status : roomStatus,
-    //  }
-    // console.log(roomInfor)
-    const data = {
-      branch: 'cm25zey1c0004jv0a02qe0zb0',
-      price_per_night: roomInforData.price_per_night,
-      price_per_month: roomInforData.price_per_month,
-      name: roomInforData.name,
-      description: roomInforData.description,
-      acreage: roomInforData.acreage,
-      bed_type: bedTypes.id,
-      comforts: comportArray,
-      status: roomStatus,
-      stock: roomInforData.stock,
-      max_adults: roomInforData.max_adults,
-      max_children: roomInforData.max_children,
-      max_babies: roomInforData.max_babies,
-      available_from: date?.from?.getTime().toString(),
-      available_to: date?.to?.getTime().toString(),
-      images: files ? files : [],
-    }
-    console.log(data)
 
+  const handleSubmitGlobalData = async () => {
     try {
-      const res = await axios.postForm(
-        "http://localhost:6002/room",
-        {
-          branch: 'cm25zey1c0004jv0a02qe0zb0',
-          price_per_night: roomInforData.price_per_night,
-          price_per_month: roomInforData.price_per_month,
-          name: roomInforData.name,
-          description: roomInforData.description,
-          acreage: roomInforData.acreage,
-          bed_type: bedTypes.id,
-          comforts: comportArray,
-          status: roomStatus,
-          stock: roomInforData.stock,
-          max_adults: roomInforData.max_adults,
-          max_children: roomInforData.max_children,
-          max_babies: roomInforData.max_babies,
-          available_from: date?.from?.getTime().toString(),
-          available_to: date?.to?.getTime().toString(),
-          images: files ? files : [],
-        },
-        {
-          withCredentials: true,
+      const formData = new FormData();
+  
+      formData.append("branch", branch.id);
+      formData.append("price_per_night", roomInforData.price_per_night);
+      formData.append("price_per_month", roomInforData.price_per_month);
+      formData.append("name", roomInforData.name);
+      formData.append("acreage", roomInforData.acreage);
+      formData.append("bed_type", bedTypes.id);
+      formData.append("status", roomStatus);
+      formData.append("stock", roomInforData.stock);
+      formData.append("max_adults", roomInforData.max_adults);
+      formData.append("max_children", roomInforData.max_children);
+      formData.append("max_babies", roomInforData.max_babies);
+      formData.append("available_from", date?.from?.getTime().toString() || "");
+      formData.append("available_to", date?.to?.getTime().toString() || "");
+
+      for (const desc of roomInforData.description) {
+        formData.append("description", desc);
+      }
+
+      for (const confort of comportArray) {
+        formData.append("comforts", confort);
+      }
+  
+      if (files && files.length > 0) {
+        for (const file of files) {
+          if (file instanceof File) {
+            formData.append(`images`, file, file.name);
+          } 
         }
-      );
+      }
+  
+      const res = await axios.post("http://localhost:6002/room", formData, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+  
       console.log(res.data);
     } catch (error: Error | any) {
       console.log(
         "Error ",
-        Array.isArray(error.response.data.message)
-          ? error.response.data?.message?.join(", ")
-          : error.response.data?.message
+        Array.isArray(error.response?.data?.message)
+          ? error.response?.data?.message.join(", ")
+          : error.response?.data?.message
       );
     }
   };
@@ -192,7 +168,7 @@ export default function Room() {
         />
         <BasicInput
           currentValue={roomInforData.price_per_night}
-          field="price_per_day"
+          field="price_per_night"
           setValue={setRoomInforData}
           nameInput="Giá Tiền (1 ngày)"
           placeholder="Nhập số tiền (VNĐ)"

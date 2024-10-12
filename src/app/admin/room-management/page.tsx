@@ -1,6 +1,11 @@
 import RoomInforItem from "@/app/components/Room-Management/RoomInfor"
 import Room from "../room-create/page"
+import { useEffect } from "react"
 export default function RoomManagement() {
+ 
+  useEffect(() => {
+
+  },[])
   
   const data = [
     {

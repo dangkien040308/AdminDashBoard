@@ -12,6 +12,6 @@ export type BranchInforType = {
   best_comforts: string[];
   location: string;
   surrounding_area?: string[];
-  images? : File[] | string[];
+  images? :  string[];
 }
  
