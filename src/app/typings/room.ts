@@ -1,18 +1,19 @@
 export type RoomInfor = {
   branch : string,
-  branch_id : string,
+  bed_type : string,
   name : string,
   acreage : string,
-  person_per_room : string,
+  comports : string[],
+  status : string,
+  stock : string,
   price_per_day : string,
   price_per_month : string,
-  description : string,
-  available_from : Date,
-  available_to : Date,
+  description : string[],
+  available_from : string | number,
+  available_to : string | number,
   max_adults : string,
   max_children : string,
   max_babies : string,
-  images : File[] | string[]
 }
 
 export type RoomStatus = 'availabe' | 'full'
@@ -53,15 +54,17 @@ export type RoomManagement = {
   price_per_day : string,
   price_per_month : string,
   name : string,
-  description : string,
-  comport : string[],
+  description : string[],
   status : RoomStatus | string,
   acreage : string,
-  available_from : Date,
-  available_to : Date,
+  available_from : string,
+  available_to : string,
   max_adults : string,
   max_children : string,
   max_babies : string,
+  bed_type : string,
+  stock : string,
+  comports : string[],
   images : File[] | string[]
 }
 

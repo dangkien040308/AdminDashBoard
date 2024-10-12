@@ -10,12 +10,14 @@ export default function RoomManagement() {
       price_per_day : '450000',
       price_per_month : '23000000',
       name : "TP HCM 1",
-      description : "Phong dep ...",
-      comport : ["HCM_center", "balcony", "desk_working", "gym", "comfortable_room"],
+      description : ["Phong dep ..."],
+      comforts : ["HCM_center", "balcony", "desk_working", "gym", "comfortable_room"],
       status : "availabe",
       acreage : '25',
-      available_from : new Date(),
-      available_to : new Date(),
+      available_from : "",
+      available_to : "",
+      stock : "",
+      bed_type : "",
       person_per_room : '4',
       max_adults : '4',
       max_children : '3',
@@ -29,12 +31,14 @@ export default function RoomManagement() {
       price_per_day : '300000',
       price_per_month : '15000000',
       name : "HN 1",
-      description : "Phong dep ...",
-      comport : ["HN_center", "balcony", "city_view", "pool", "television", "breakfast_buffet"],
+      description : ["Phong dep ..."],
+      comforts : ["HN_center", "balcony", "city_view", "pool", "television", "breakfast_buffet"],
       status : "availabe",
       acreage : '32',
-      available_from : new Date(),
-      available_to : new Date(),
+      available_from : "",
+      available_to : "",
+      stock : "",
+      bed_type : "",
       person_per_room : '6',
       max_adults : '6',
       max_children : '4',
@@ -44,9 +48,11 @@ export default function RoomManagement() {
   ]
   return (
     <div>
-      <span className="text-3xl text-blue-600 font-[600]">Room Management</span>
+      <span className="text-3xl text-blue-600 font-[600]">Quản Lí Phòng</span>
       {data.map((item,id) => (
         <RoomInforItem 
+          stock={item.stock}
+          bed_type={item.bed_type}
           key={id}
           images={item.images}
           branch_id={item.branch_id}
@@ -56,7 +62,7 @@ export default function RoomManagement() {
           price_per_month = {item.price_per_month}
           name = {item.name}
           description = {item.description}
-          comport = {item.comport}
+          comforts = {item.comforts}
           status = {item.status}
           acreage = {item.acreage}
           available_from = {item.available_from}

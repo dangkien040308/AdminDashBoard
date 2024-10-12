@@ -81,3 +81,12 @@ td {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* Ẩn nút tăng giảm trong các trình duyệt WebKit (Chrome, Safari) */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
