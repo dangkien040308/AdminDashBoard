@@ -1,13 +1,16 @@
 'use client'
+
 import Image from "next/image"
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { BranchInforType } from "@/app/typings/branch"
 import { Fragment } from "react";
 import EditFormBranch  from "./EditForm_Branch"
 
 
-export default function BranchInfor({name, description, trademark, url, province, ward, best_comforts, location, surrounding_area, images} : BranchInforType) {
+export default function BranchInfor({name, description, trademark, url, province, ward, best_comforts, location, surrounding_area, images, branch_id} : BranchInforType) {
+  const router = useRouter();
   const [edit, setEdit] = useState<boolean>(false);
   return (
     <div className="rounded-lg shadow-lg bg-slate-200 p-5 flex items-start justify-center mt-5 flex-col">
@@ -32,22 +35,8 @@ export default function BranchInfor({name, description, trademark, url, province
 
        <div className="flex items-start justify-between gap-4 text-neutral-900 mt-5">
           <div className="w-[50%]">
-            {/* <div>
-              <span
-                className={`inline-block w-[10px] h-[10px] rounded-full mr-1 ${
-                  status === "availabe" ? "bg-green-500" : "bg-red-500"
-                }`}
-              ></span>
-              <span
-                className={`font-[650] text-lg ${
-                  status === "availabe" ? "text-green-500" : "text-red-500"
-                }`}
-              >
-                {status === "availabe" ? "Còn Phòng" : "Đã Đầy"}
-              </span>
-            </div> */}
             <span className="text-neutral-700 block">
-                Kiểu chi nhánh :{" "} <strong>{trademark.name}</strong> 
+                Kiểu chi nhánh :{" "} <strong>{trademark}</strong> 
             </span>
             <span className="text-neutral-700 block">
                 Tỉnh/ Thành Phố :{" "} <strong>{province}</strong>
@@ -61,17 +50,20 @@ export default function BranchInfor({name, description, trademark, url, province
 
           </div>
           <div className="w-[45%]">
-            <span className="text-neutral-900 flex">
-                <strong className="w-[20%]">Mô tả :</strong> 
-                <i className="">
-                  {description.map((item : string, id : number) => (
-                      <Fragment key={id}>
-                        {item}
-                        {id < description.length - 1 && <br />} {/* Add <br /> except for the last item */}
-                      </Fragment>
-                  ))}
-                </i>
-            </span>
+            <div className="text-neutral-900 flex">
+                <span className="w-[15%] block"><strong >Mô tả :</strong> </span>  
+                 <span className="">
+                    <i className="">
+                      {description.map((item : string, id : number) => (
+                          <Fragment key={id}>
+                            {item}
+                            {id < description.length - 1 && <br />} {/* Add <br /> except for the last item */}
+                          </Fragment>
+                      ))}
+                    </i>
+                 </span> 
+                 
+            </div>
           </div>
           
 
@@ -91,33 +83,10 @@ export default function BranchInfor({name, description, trademark, url, province
        
        <button
           className="mt-10 w-max mx-auto px-5 py-1 rounded-lg bg-blue-500 text-white font-bold cursor-pointer hover:opacity-50 hover:bg-blue-600"
-          onClick={() => setEdit(true)}
+          onClick={() => router.push(`branch/edit/${branch_id}`)}
         >
           Chỉnh Sửa
         </button>
-
-
-       {edit ? (
-        <div>
-          <EditFormBranch
-            name={name}
-            description={description}
-            trademark={trademark}
-            province={province}
-            ward={ward}
-            best_comforts={best_comforts}
-            location={location}
-            images={images || []}
-            setEdit={setEdit}
-          />
-          <div
-            className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50"
-            onClick={(e) => {
-              setEdit(false);
-            }}
-          ></div>
-        </div>
-      ) : null}
 
     </div>
   )

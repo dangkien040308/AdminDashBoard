@@ -1,13 +1,11 @@
+
 import BranchInfor from "@/app/components/Branch-Management/BranchInfor";
 
 const BranchData = [
   {
     name: 'Tao Dan Park',
     description: ['Gan trung tam, view dep, nhieu tien ich', 'Co xe dua don'],
-    trademark: {
-      name : 'Manor Villas',
-      id : 'manor_villas'
-    },
+    trademark : 'manor_villas',
     url: '/taodanpark',
     province: 'Ho Chi Minh',
     ward: 'Quan 1',

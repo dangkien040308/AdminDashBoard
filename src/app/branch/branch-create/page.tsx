@@ -14,16 +14,13 @@ export default function BranchCreatePage() {
   const [branchInfor, setBranchInfor] = useState<BranchInforType>({
     name: "",
     description: [""],
-    trademark: {
-      name : "",
-      id : ""
-    },
+    trademark: "",
     url: "",
     province: "",
     ward: "",
     best_comforts: [""],
     location: "",
-    surrounding_area: [""],
+    surrounding_area: [],
     images : []
   });
   const [comportArray, setComportArray] = useState<string[]>([]);
@@ -42,40 +39,6 @@ export default function BranchCreatePage() {
       surrounding_area: branchInfor.surrounding_area,
     }
   }
-  const dataTrademark = [
-    {
-      name : 'Manor Villas',
-      id : 'manor_villas'
-    }, 
-    {
-      name : 'New Life',
-      id : 'new_life'
-    }, 
-    {
-      name : 'Gate Boutique Da Lat',
-      id : 'gate_boutique_da_lat'
-    }, 
-    {
-      name : 'Gate Boutique Sa Pa',
-      id : 'gate_boutique_sa_pa'
-    },
-    {
-      name : 'Gold View',
-      id : 'gold_view'
-    },
-    {
-      name : 'Moon Valley Villas',
-      id : 'moon_valley_villas'
-    },
-    {
-      name : 'Yukkuri Boutique',
-      id : 'yukkuri_boutique'
-    },
-    {
-      name : 'Lumina',
-      id : 'lumina'
-    }
-  ]
   const [trademark, setTrademark] = useState<{
     id : string,
     name : string
@@ -86,22 +49,15 @@ export default function BranchCreatePage() {
 
   return (
     <div>
-      <span className="text-3xl text-blue-600 font-[600]">Tạo Chi Nhanh</span>
+      <span className="text-3xl text-blue-600 font-[600]">Tạo Chi Nhánh</span>
 
       <div className="flex items-start justify-between mt-10 flex-wrap">
-        <BranchSelect 
-           placeholder="Chọn kiểu chi nhánh"
-           BranchLocaiton={dataTrademark}
-           currentBranchLocation={trademark}
-           setBranchLocation={setTrademark}
-           lable="Chọn Kiểu Chi Nhánh"    
-        />
         <BasicInput
           nameInput="Tên Chi Nhánh"
           placeholder="Nhập tên chi nhánh"
           type="text"
           field="name"
-          setValue={setBranchInfor}
+          setValue={(e) => set}
           currentValue={branchInfor.name}
         />
         <BasicInput

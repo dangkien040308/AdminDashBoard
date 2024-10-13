@@ -1,5 +1,4 @@
-import { RoomInfor } from "@/app/typings/room";
-import { memo } from "react";
+import { ChangeEventHandler, memo } from "react";
 
 type Props = {
   nameInput: string;
@@ -7,8 +6,7 @@ type Props = {
   type: string;
   minValue?: number;
   currentValue?: string;
-  field: string;
-  setValue: React.Dispatch<React.SetStateAction<any>>;
+  setValue: ChangeEventHandler<HTMLInputElement>;
 };
 
 const BasicInput: React.FC<Props> = ({
@@ -17,15 +15,8 @@ const BasicInput: React.FC<Props> = ({
   type,
   minValue = 1,
   currentValue,
-  setValue,
-  field,
+  setValue
 }) => {
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((prevState : any) => ({
-      ...prevState,
-      [field]: e.target.value,
-    }));
-  };
   return (
     <div className="w-[45%] p-2">
       <label className="mb-3 block text-body-sm font-[600] text-gray-900">
@@ -34,9 +25,7 @@ const BasicInput: React.FC<Props> = ({
       <input
         required
         value={currentValue && currentValue}
-        onChange={(e) => {
-          handleOnChange(e);
-        }}
+        onChange={setValue}
         placeholder={placeholder}
         type={type}
         min={minValue}

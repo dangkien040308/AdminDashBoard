@@ -31,7 +31,6 @@ export default function MutilpleFileInput({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return; 
     setFiles(e.target.files);
-    console.log(e.target.files)
   };
   
   return (
