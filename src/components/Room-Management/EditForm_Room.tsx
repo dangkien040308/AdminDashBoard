@@ -1,8 +1,8 @@
 "use client";
 import { RoomComport, RoomInfor, RoomManagement } from "@/app/typings/room";
 import { useState, Dispatch, SetStateAction } from "react";
-import ToDos from "@/app/components/Inputs/ToDos";
-import MutilpleFileInput from "@/app/components/Inputs/MutipleFileInput";
+import ToDos from "@/components/Inputs/ToDos";
+import MutilpleFileInput from "@/components/Inputs/MutipleFileInput";
 import BasicInput from "../Inputs/BasicInput";
 import TextAreaInput from "../Inputs/TextAreaInput";
 import { AnyNode } from "postcss";

@@ -6,7 +6,7 @@ type Route = "booking" | "users" | "room";
 
 export default function Sidebar({ className }: { className: string | null }) {
   const pathname = usePathname();
-  const currentRoute = pathname.split("/")[2];
+  const currentRoute = pathname;
 
   return (
     <div
@@ -20,7 +20,7 @@ export default function Sidebar({ className }: { className: string | null }) {
           Hotel Mvillage
         </span>
         <Link
-          href="/admin/room-create"
+          href="/branch"
           className={
             "text-neutral-600 hover:text-neutral-950 rounded-md hover:bg-[#F3F4F6] p-2 cursor-pointer mb-2 " +
             (currentRoute === "room-create"
@@ -31,7 +31,7 @@ export default function Sidebar({ className }: { className: string | null }) {
           Tạo Phòng
         </Link>
         <Link
-          href="/admin/room-management"
+          href="/branch"
           className={
             "text-neutral-600 hover:text-neutral-950 rounded-md hover:bg-[#F3F4F6] p-2 cursor-pointer mb-2 " +
             (currentRoute === "room-management"
@@ -42,10 +42,10 @@ export default function Sidebar({ className }: { className: string | null }) {
           Quản Lí Phòng
         </Link>
         <Link
-          href="/admin/branch-create"
+          href="/branch/create"
           className={
             "text-neutral-600 hover:text-neutral-950 rounded-md hover:bg-[#F3F4F6] p-2 cursor-pointer mb-2 " +
-            (currentRoute === "branch-create"
+            (currentRoute === "/branch/create"
               ? "bg-[#F3F4F6] font-[600] text-neutral-900"
               : "")
           }
@@ -53,10 +53,10 @@ export default function Sidebar({ className }: { className: string | null }) {
           Tạo Chi Nhánh
         </Link>
         <Link
-          href="/admin/branch-management"
+          href="/branch"
           className={
             "text-neutral-600 hover:text-neutral-950 rounded-md hover:bg-[#F3F4F6] p-2 cursor-pointer mb-2 " +
-            (currentRoute === "branch-management"
+            (currentRoute === "/branch"
               ? "bg-[#F3F4F6] font-[600] text-neutral-900"
               : "")
           }

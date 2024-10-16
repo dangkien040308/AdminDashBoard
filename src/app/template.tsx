@@ -1,6 +1,6 @@
-import Sidebar from "./components/Layouts/Sidebar";
+import Sidebar from "../components/Layouts/Sidebar";
 import Header
- from "./components/Layouts/Header";
+ from "../components/Layouts/Header";
 export default function RootTemplate({children} : {children : React.ReactNode}) {
   
   return (

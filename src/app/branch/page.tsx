@@ -2,24 +2,23 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-import { Branch } from "../../../typings/data";
-import BranchInfor from "@/app/components/Branch-Management/BranchInfor";
-import Loading from "../../components/loading";
+import BranchInfor from "@/components/Branch-Management/BranchInfor";
+import getImage from "../../lib/getImage"
+
 
 export default function BranchListPage() {
     const [data, setData] = useState<any[]>([]);
-    console.log('rerender')
     useEffect(() => {
         
         axios
             .get("http://localhost:6002/branch/all")
             .then((res) => {
-                console.log(res.data)
                 setData(res.data.data)
             })
             .catch((err) => {
                 console.error(err);
             });
+
 
         // then catch = try catch use effect k sài try catch đc em ơi với lại sài then rồi thì axios k return đâu code v là chuẩn rồi
     }, []);
@@ -42,7 +41,7 @@ export default function BranchListPage() {
                               best_comforts={item.best_comforts ? item.best_comforts : []}
                               location={item.location ? item.location : ""}
                               surrounding_area={item.surrounding_area ? item.surrounding_area : []}
-                              images={item.images ? item.images : []}
+                              images={item.images ? item.images?.map((imageUrl : any) => getImage(imageUrl)) : []}
                               branch_id={item.branch_id}
                           />
                       ))

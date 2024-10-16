@@ -1,16 +1,16 @@
 "use client";
 
-import Heading2 from "@/app/components/Heading/heading2";
-import BasicInput from "@/app/components/Inputs/BasicInput";
-import DatePicker from "@/app/components/Inputs/DatePicker";
-import MutilpleFileInput from "@/app/components/Inputs/MutipleFileInput";
-import TextAreaInput from "@/app/components/Inputs/TextAreaInput";
-import ToDos from "@/app/components/Inputs/ToDos";
+import Heading2 from "@/components/Heading/heading2";
+import BasicInput from "@/components/Inputs/BasicInput";
+import DatePicker from "@/components/Inputs/DatePicker";
+import MutilpleFileInput from "@/components/Inputs/MutipleFileInput";
+import TextAreaInput from "@/components/Inputs/TextAreaInput";
+import ToDos from "@/components/Inputs/ToDos";
 import { addDays } from "date-fns";
 import { useState } from "react";
 import { DateRange } from "react-day-picker";
 
-import BedTypeSelect from "@/app/components/Inputs/BedTypeSelect";
+import BedTypeSelect from "@/components/Inputs/BedTypeSelect";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 import { RoomBedType } from "../../../../../typings/enum";

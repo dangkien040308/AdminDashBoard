@@ -1,9 +1,9 @@
 'use client'
-import BasicInput from "@/app/components/Inputs/BasicInput";
-import TextAreaInput from "@/app/components/Inputs/TextAreaInput";
-import MutilpleFileInput from "@/app/components/Inputs/MutipleFileInput";
-import ToDos from "@/app/components/Inputs/ToDos";
-import BranchSelect from "@/app/components/Inputs/BranchSelect";
+import BasicInput from "@/components/Inputs/BasicInput";
+import TextAreaInput from "@/components/Inputs/TextAreaInput";
+import MutilpleFileInput from "@/components/Inputs/MutipleFileInput";
+import ToDos from "@/components/Inputs/ToDos";
+import BranchSelect from "@/components/Inputs/BranchSelect";
 
 import { useState } from "react";
 export default function EditFormBranch({

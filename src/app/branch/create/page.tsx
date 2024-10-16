@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import BasicInput from "@/app/components/Inputs/BasicInput";
-import TextAreaInput from "@/app/components/Inputs/TextAreaInput";
-import MutilpleFileInput from "@/app/components/Inputs/MutipleFileInput";
-import ToDos from "@/app/components/Inputs/ToDos";
-import Heading2 from "@/app/components/Heading/heading2";
-import BranchSelect from "@/app/components/Inputs/BranchSelect";
+import BasicInput from "@/components/Inputs/BasicInput";
+import TextAreaInput from "@/components/Inputs/TextAreaInput";
+import MutilpleFileInput from "@/components/Inputs/MutipleFileInput";
+import ToDos from "@/components/Inputs/ToDos";
+import Heading2 from "@/components/Heading/heading2";
+import { useToast } from "@/hooks/use-toast";
 
 import axios from "axios";
 import slugify from "@/lib/convertString";
@@ -13,7 +13,7 @@ import slugify from "@/lib/convertString";
 import { BranchInforType } from "@/app/typings/branch";
 
 export default function BranchCreatePage() {
-    const [data, setData] = useState<any | undefined>();
+    const { toast } = useToast();
     const [files, setFiles] = useState<FileList>();
     const [branchInfor, setBranchInfor] = useState<BranchInforType>({
         name: "",
@@ -33,46 +33,6 @@ export default function BranchCreatePage() {
     });
     const [comportArray, setComportArray] = useState<string[]>([]);
     const [currentComport, setCurrentComport] = useState<string>("");
-
-    // const handleTest = async () => {
-    //   const data = {
-    //     name: branchInfor.name,
-    //     description: branchInfor.description,
-    //     trademark: branchInfor.trademark,
-    //     url: branchInfor.name.toLocaleLowerCase().trim().replace(' ','_'),
-    //     province: branchInfor.province,
-    //     ward: branchInfor.ward,
-    //     best_comforts: comportArray,
-    //     location: branchInfor.location,
-    //     surrounding_area: branchInfor.surrounding_area,
-    //     images : files
-    //   }
-    //   console.log(data)
-    //   axios
-    //    .post('http://localhost:6002/branch', {
-    //      name : branchInfor.name,
-    //      description : branchInfor.description,
-    //      trademark : branchInfor.trademark,
-    //      province : branchInfor.province,
-    //      url : branchInfor.name.toLocaleLowerCase().trim().replace(' ','_'),
-    //      ward : branchInfor.ward,
-    //      best_comforts : branchInfor.best_comforts,
-    //      location : branchInfor.location,
-    //      surrounding_area : branchInfor.surrounding_area
-    //    }, {
-    //      withCredentials : true,
-    //      headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //    })
-    //     .then(res => {
-    //       setData(res)
-    //     })
-    //     .catch(err => {
-    //       console.error(err)
-    //     })
-
-    // }
     const handleBranchSubmit = async () => {
         try {
             const formData = new FormData();
@@ -88,21 +48,20 @@ export default function BranchCreatePage() {
                 formData.append(`description[${index}]`, desc); // Chuyển đối
             });
 
-            branchInfor.best_comforts.forEach((comfort, index) => {
+            comportArray.forEach((comfort, index) => {
                 formData.append(`best_comforts[${index}]`, comfort);
             });
             branchInfor.surrounding_area.forEach((area, index) => {
                 formData.append(`surrounding_area[${index}][name]`, area.name);
                 formData.append(`surrounding_area[${index}][distance]`, area.distance);
             });
-
-            if (files && files.length > 0) {
-                Array.from(files).forEach((file : File, index : number) => {
-                  if (file instanceof File) {  
-                    formData.append(`images[${index}]`, file, file.name);
-                  }
-                    
-                });
+           
+            if (files) {
+                for (const file of files) {
+                    if (file instanceof File) {
+                        formData.append("images", file, file.name);
+                    }
+                }
             }
 
             const res = await axios.post("http://localhost:6002/branch", formData, {
@@ -112,9 +71,18 @@ export default function BranchCreatePage() {
                 },
             });
 
-            console.log(res);
+            if (res.status === 201) {
+               
+            }
         } catch (error: any) {
             console.log(error);
+            toast({
+                title: "Có gì đó không ổn",
+                description: Array.isArray(error.response.data.message)
+                    ? error.response.data?.message?.join(", ")
+                    : error.response.data?.message,
+                variant: "destructive",
+            });
         }
     };
 

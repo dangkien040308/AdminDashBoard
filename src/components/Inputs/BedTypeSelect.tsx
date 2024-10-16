@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
-import { RoomBedType } from "../../../../typings/enum";
+import { RoomBedType } from "../../../typings/enum";
 
 export default function BedTypeSelect({
     bedType,
